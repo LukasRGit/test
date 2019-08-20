@@ -1,0 +1,375 @@
+﻿$ocm-main: rgb(42, 42, 42) !default;
+$ocm-side-panel: rgb(0, 0, 0) !default;
+$white: rgb(255, 255, 255) !default;
+$black: rgb(0, 0, 0) !default;
+$grey: rgb(128, 128, 128) !default;
+
+body {
+    overflow-x: hidden;
+    width: 100%;
+} 
+
+#ocmMenuWrapper {
+    display: flex;
+    height: 100%;
+    /*overflow-x: hidden;*/
+    position: fixed;
+    transition: transform .5s;
+    z-index: 5000;
+    
+    &.direction-left::before {
+        background: $ocm-side-panel;
+        content: "";
+        height: 100%;
+        left: -50%;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+    }
+
+    &.direction-right::before {
+        background: $ocm-main;
+        content: "";
+        height: 100%;
+        right: -50%;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+    }
+
+    &.direction-top::before {
+        background: $ocm-main;
+        content: "";
+        height: 100%;
+        top: -50%;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+    }
+
+    &.direction-bottom::before {
+        background: $ocm-main;
+        content: "";
+        height: 100%;
+        bottom: -50%;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+    }
+    
+    .side-panel {
+        background: $ocm-side-panel;
+        padding: 10px 0;
+        text-align: center;
+        
+        .login-wrapper {
+            border-bottom: 1px solid $white;
+            margin-bottom: 20px;
+        }
+        
+        a {
+            color: darken($white, 5%);
+            display: block;
+            margin: 0 0 20px;
+            
+            &:hover {
+                color: lighten($ocm-main, 25%);
+            }
+            
+            span {
+                font-size: 30px;
+            }
+        }
+        
+        &+ ul {
+            position: relative;
+        }
+    }
+
+    ul {
+        background: $ocm-main;
+        left: 0;
+        margin: 0;
+        max-height: 100%;
+        min-height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: absolute;
+        top: 0;
+        z-index: 510;
+
+        &.ul-closed {
+            pointer-events: none;
+        }
+
+        li {
+            border-bottom: 1px solid lighten($ocm-main, 20%);
+            color: darken($white, 5%);
+            display: block;
+            list-style-type: none;
+
+            &.btnOCMBack {
+                padding: 11px 15px;
+                transition: background .5s ease 0s;
+
+                &:hover {
+                    background: darken($ocm-main, 10%);
+                    cursor: pointer;
+                }
+                
+                i {
+                    color: lighten($ocm-main, 40%);
+                    font-size: 20px;
+                }
+            }
+            
+            > span {
+                
+                &:nth-of-type(2) {
+                    width: calc(100% - 59px);
+                    
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+            
+            span {
+                color: darken($white, 5%);
+                display: inline-block;
+                padding: 12px 15px;
+                transition: background .5s ease 0s;
+                
+                &:hover {
+                    background: darken($ocm-main, 10%);
+                }
+            }
+
+            a {
+                display: block;
+                text-decoration: none;     
+                
+                > span {
+                    width: 100%;
+                    
+                    > span {
+                        padding: 0 10px;
+                    }
+                }
+            }
+        }
+
+        ul {
+            backface-visibility: hidden;
+            background: $ocm-main;
+            margin: 0;
+            top: 0;
+            transition: .5s;
+            width: 100%;
+            z-index: 520;
+
+            .ocmSubMenu {
+                z-index: 521;
+            }
+
+            ul {
+                z-index: 540;
+
+                .ocmSubMenu {
+                    z-index: 541;
+				}
+
+                ul {
+                    z-index: 550;
+
+                    .ocmSubMenu {
+                        z-index: 551;
+				    }
+
+                    ul {
+                        z-index: 560;
+
+                        .ocmSubMenu {
+                            z-index: 561;
+				        }
+			        }
+			    }
+			}
+		}
+		
+        .ocmSubMenu {
+            background: $ocm-main;
+            border-left: 1px solid lighten($ocm-main, 20%);
+            color: lighten($ocm-main, 40%);
+            display: block;
+            float: right;
+            position: relative;
+            right: 0;
+            text-align: center;
+            top: 0;
+            transition: background .5s ease 0s;
+            width: 59px;
+            z-index: 511;
+
+            &:hover {
+                background: darken($ocm-main, 10%);
+                cursor: pointer;
+            }
+            
+            &+ a {
+                width: calc(100% - 59px);
+            }
+        }
+    }
+    
+    .ocm-logo {
+        display: inline-block;
+        padding-left: 30px;
+        text-align: center;
+        width: calc(100% - 60px);
+        
+        &:only-child {
+            padding-left: 0;
+            width: 100%;
+        }
+        
+        &+ .ocm-close {
+            display: inline-block;
+            vertical-align: top;
+        }
+        
+        img {
+            margin: 10px;
+            max-height: 60px;
+        }
+    }
+
+    .ocm-close {
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        span {
+            padding: 11px 22px;
+            text-align: right;
+            
+            i {
+                color: lighten($ocm-main, 40%);
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+.ocm-overlay {
+    background: $black;
+    position: fixed;
+    height: 100vh;
+    opacity: 0;
+    transition: opacity .3s ease 0s, visibility .3s ease 0s;
+    visibility: hidden;
+    width: 100vw;
+    z-index: 4000;
+
+    &.active {
+        opacity: .4;
+        visibility: visible;
+    }
+}
+
+/* HAMBURGER MENU */
+.hamburger {
+    background-color: transparent;
+    border: 0;
+    display: flex;
+    padding: 0;
+    transition-duration: .5s;
+    transition-timing-function: linear;
+    
+    &.is-active {
+        
+        .hamburger-box {
+            
+            .hamburger-inner {
+                transform: rotate(45deg);
+                transition-delay: 0.12s;
+                transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+                &::before {
+                    top: 0;
+                    transition: top 0.075s ease, background .5s ease 0s;
+                }
+
+                &::after {
+                    bottom: 0;
+                    transform: rotate(90deg);
+                    transition: bottom 0.075s ease, transform 0.2s 0.24s cubic-bezier(0.215, 0.61, 0.355, 1.5), background .5s ease 0s;
+                }
+            }
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+
+        .hamburger-box {
+
+            .hamburger-inner,
+            .hamburger-inner::before,
+            .hamburger-inner::after {
+                background: $grey;
+            }
+        }
+    }
+    
+    .hamburger-box {
+        align-self: center;
+        display: inline-block;
+        height: 18px;
+        position: relative;
+        width: 30px;
+        
+        .hamburger-inner {
+            display: block;
+            margin-top: -2px;
+            top: 50%;
+            transition-duration: 0.075s;
+            transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+            &,
+            &::before,
+            &::after {
+                background-color: $black;
+                border-radius: 4px;
+                height: 4px;
+                position: absolute;
+                transition: transform .15s ease 0s, background .5s ease 0s;
+                width: 30px;
+            }
+
+            &::before,
+            &::after {
+                content: "";
+                display: block;
+            }
+
+            &::before {
+                top: -7px;
+                transition: top 0.075s 0.12s ease, background .5s ease 0s;
+            }
+
+            &::after {
+                bottom: -7px;
+                transition: bottom 0.075s 0.12s ease, transform 0.075s cubic-bezier(0.55, 0.055, 0.675, 0.19), background .5s ease 0s;
+            }
+        }
+    }
+    
+    .menu-label {
+        align-self: center;
+        font-family: inherit;
+        font-size: 20px;
+        margin-left: 5px;
+    }
+}
